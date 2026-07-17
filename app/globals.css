@@ -1,0 +1,248 @@
+:root {
+  --bg: #0d1117;
+  --panel: #161b22;
+  --border: #2a3139;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #4c9be8;
+  --tag: #2d333b;
+  --green: #3fb950;
+  --red: #f0776c;
+  --amber: #d29922;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.55;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.topbar {
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+.topbar-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.brand {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.brand:hover {
+  text-decoration: none;
+}
+.navlinks {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  font-size: 0.92rem;
+}
+
+.wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+h1 {
+  font-size: 1.7rem;
+  margin: 0 0 0.3rem;
+  letter-spacing: -0.02em;
+}
+h2 {
+  font-size: 1.1rem;
+  margin: 0 0 0.8rem;
+}
+p {
+  margin: 0 0 1rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+.small {
+  font-size: 0.85rem;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.3rem 1.4rem;
+  margin: 1.3rem 0;
+}
+
+.stats {
+  display: flex;
+  gap: 0.9rem;
+  margin: 1.3rem 0;
+  flex-wrap: wrap;
+}
+.stat {
+  flex: 1 1 130px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.stat .num {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.stat .num.loss {
+  color: var(--amber);
+}
+.stat .lbl {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.tbl-wrap {
+  overflow-x: auto;
+}
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.tbl th,
+.tbl td {
+  text-align: left;
+  padding: 0.55rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.tbl th {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.tbl td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.mono {
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+}
+.badge.PURCHASE {
+  color: var(--green);
+  border-color: rgba(63, 185, 80, 0.4);
+}
+.badge.TRANSFER {
+  color: var(--accent);
+  border-color: rgba(76, 155, 232, 0.4);
+}
+.badge.LOSS {
+  color: var(--amber);
+  border-color: rgba(210, 153, 34, 0.4);
+}
+
+.filters {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.field label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+select,
+input,
+textarea {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 0.5rem 0.6rem;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.92rem;
+  min-width: 10rem;
+}
+textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #04121f;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.92rem;
+}
+.btn:hover {
+  text-decoration: none;
+  filter: brightness(1.08);
+}
+.btn-sm {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.form-grid {
+  display: grid;
+  gap: 1rem;
+  max-width: 30rem;
+}
+.hint {
+  color: var(--muted);
+  font-size: 0.82rem;
+}

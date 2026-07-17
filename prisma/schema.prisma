@@ -1,0 +1,64 @@
+// stock-ledger — clean-room inventory & stock-movement demo.
+// SQLite locally for zero-setup; swap `provider` to "postgresql" for a deploy.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// A stocked item / SKU.
+model Item {
+  id        String          @id @default(cuid())
+  sku       String          @unique
+  name      String
+  unit      String          @default("units")
+  createdAt DateTime        @default(now())
+  movements StockMovement[]
+}
+
+/// A place stock can sit (warehouse, depot, yard).
+model Location {
+  id            String          @id @default(cuid())
+  code          String          @unique
+  name          String
+  createdAt     DateTime        @default(now())
+  movementsFrom StockMovement[] @relation("FromLocation")
+  movementsTo   StockMovement[] @relation("ToLocation")
+}
+
+/// Who stock was purchased from.
+model Supplier {
+  id        String          @id @default(cuid())
+  code      String          @unique
+  name      String
+  createdAt DateTime        @default(now())
+  movements StockMovement[]
+}
+
+/// The ledger. On-hand per (item, location) is DERIVED from these rows — the
+/// balances are never stored, so they can't drift out of sync with history.
+///   PURCHASE  +qty at toLocation (from a supplier)
+///   TRANSFER  -qty at fromLocation, +qty at toLocation
+///   LOSS      -qty at fromLocation (shrinkage / clipping / waste)
+model StockMovement {
+  id             String    @id @default(cuid())
+  type           String // PURCHASE | TRANSFER | LOSS
+  item           Item      @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  itemId         String
+  quantity       Int
+  fromLocation   Location? @relation("FromLocation", fields: [fromLocationId], references: [id])
+  fromLocationId String?
+  toLocation     Location? @relation("ToLocation", fields: [toLocationId], references: [id])
+  toLocationId   String?
+  supplier       Supplier? @relation(fields: [supplierId], references: [id])
+  supplierId     String?
+  note           String?
+  createdAt      DateTime  @default(now())
+
+  @@index([itemId])
+  @@index([type])
+}
