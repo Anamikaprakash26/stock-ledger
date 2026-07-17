@@ -1,12 +1,11 @@
-// stock-ledger — clean-room inventory & stock-movement demo.
-// SQLite locally for zero-setup; swap `provider` to "postgresql" for a deploy.
+// stock-ledger — clean-room inventory & stock-movement demo. Postgres (Neon).
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 

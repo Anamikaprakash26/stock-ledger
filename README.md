@@ -40,18 +40,30 @@ what's where, and what leaked out.
 ## Stack
 
 Next.js 15 (App Router, Server Components, Route Handlers) · TypeScript · Prisma
-ORM · SQLite locally (swap the datasource `provider` to `postgresql` to deploy).
+ORM · **Postgres** (Neon) · deployed on **Vercel**.
 
 ## Run it locally
 
+You need a Postgres database — the quickest is a free one from [Neon](https://neon.tech).
+
 ```bash
 npm install
-npm run setup    # creates the SQLite DB and seeds demo data
-npm run dev      # http://localhost:3000
+cp .env.example .env   # paste your Postgres URL into DATABASE_URL
+npm run setup          # applies migrations + seeds demo data
+npm run dev            # http://localhost:3000
 ```
 
 Then record a movement and watch the dashboard balances change; filter by a
 location to see just what's sitting there.
+
+## Deploy (Vercel + Neon)
+
+1. Create a free Postgres database at [neon.tech](https://neon.tech) and copy its
+   connection string (the **Direct**/unpooled one).
+2. Import this repo at [vercel.com/new](https://vercel.com/new).
+3. In **Settings → Environment Variables**, add `DATABASE_URL` = your Neon string.
+4. Deploy — the `vercel-build` script runs `prisma migrate deploy` automatically.
+5. Seed the demo data once, locally pointed at Neon: `npm run seed`.
 
 ## Project layout
 
