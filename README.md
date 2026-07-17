@@ -12,6 +12,8 @@ what's where, and what leaked out.
 > scratch with a made-up domain (warehouse goods) and entirely synthetic data. It
 > contains no company code or data.
 
+**▶ Live demo:** https://stock-ledger-anamikaprakash26s-projects.vercel.app
+
 ![Dashboard — stock on hand per item and location, with totals (including units lost) and filters](docs/dashboard.png)
 
 ![Movement ledger — every purchase, transfer, and loss, filterable](docs/movements.png)
